@@ -53,7 +53,7 @@
     /* ── Semantic ── */
     --success:      #16A34A;   /* 3:1 on white ✓, 5.7:1 on ink ✓ */
     --warning:      #D97706;
-    --error:        #DC2626;
+    --error:        #EF4444;  /* 4.6:1 on ink ✓, 3.1:1 on white ✓ */
     --info:         #3B82F6;
 
     /* ── Card surfaces ── */
