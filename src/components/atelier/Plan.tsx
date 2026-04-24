@@ -66,16 +66,47 @@ export function Plan() {
           </div>
 
           <div className="flex items-center gap-4 flex-wrap">
-            <a
-              href="/dashboard"
-              className="inline-flex items-center gap-2 text-[12px] tracking-wide uppercase font-semibold px-8 py-3.5 rounded-sharp bg-orange text-ink hover:bg-orange-600 transition-colors"
-            >
+          <form 
+            onSubmit={async (e) => {
+              e.preventDefault();
+              const form = e.currentTarget;
+              const btn = form.querySelector('button');
+              const input = form.querySelector('input');
+              if (btn) btn.textContent = 'Starting...';
+              
+              try {
+                await fetch('/api/trial', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ email: input?.value })
+                });
+                if (btn) {
+                  btn.textContent = 'Check your email';
+                  btn.style.backgroundColor = '#10B981';
+                }
+                setTimeout(() => {
+                  window.location.href = '/dashboard';
+                }, 1500);
+              } catch (err) {
+                if (btn) btn.textContent = 'Build my plan';
+              }
+            }}
+            className="flex w-full md:w-auto items-center gap-2"
+          >
+            <input 
+              type="email" 
+              placeholder="Email address" 
+              required
+              className="px-4 py-3 rounded-sharp bg-ink border border-card-border text-paper text-sm w-full md:w-64 focus:outline-none focus:border-orange transition-colors"
+            />
+            <button type="submit" className="inline-flex items-center gap-2 text-[12px] tracking-wide uppercase font-semibold px-8 py-3.5 rounded-sharp bg-orange text-ink hover:bg-orange-600 transition-colors whitespace-nowrap cursor-pointer">
               Build my plan
-            </a>
-            <span style={{ fontSize: 13, color: 'var(--paper-faint)' }}>
-              No credit card · No email wall
-            </span>
-          </div>
+            </button>
+          </form>
+          <span style={{ fontSize: 13, color: 'var(--paper-faint)' }}>
+            No credit card · No email wall
+          </span>
+        </div>
 
           {/* Pricing-as-receipt */}
           <div className="mt-8 pt-6" style={{ borderTop: '1px solid var(--card-border)' }}>
