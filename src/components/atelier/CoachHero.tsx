@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { DynamicPlanPreview } from '@/components/atelier/DynamicPlanPreview'
 
 /**
  * CoachHero — Inline progressive questioning hero.
@@ -480,48 +481,13 @@ export function CoachHero({ onStepComplete, onAllStepsComplete }: CoachHeroProps
                 </span>
               </div>
 
-              {/* Coach message */}
-              <div
-                className="relative p-6 md:p-8"
-                style={{
-                  background: 'var(--card-surface)',
-                  border: '1px solid var(--card-border)',
-                  borderLeft: '3px solid var(--orange)',
-                  borderRadius: 'var(--radius-sharp)',
-                }}
-              >
-                {/* Coach voice indicator */}
-                <p
-                  className="label-caps mb-4"
-                  style={{ color: 'var(--orange)', letterSpacing: '0.2em' }}
-                >
-                  {coachResponse.agentVoice === 'SPARK' && 'Jake'}
-                  {coachResponse.agentVoice === 'PULSE' && 'Jake'}
-                  {coachResponse.agentVoice === 'IRON' && 'Jake'}
-                  {coachResponse.agentVoice === 'EDGE' && 'Jake'}
-                  {' '}&middot; {coachResponse.identity}
-                </p>
-
-                <motion.p
-                  className="font-display text-paper"
-                  style={{ fontSize: 'clamp(20px, 3vw, 26px)', lineHeight: 1.35, fontStyle: 'italic' }}
-                  initial={{ opacity: 0, filter: 'blur(4px)' }}
-                  animate={{ opacity: 1, filter: 'blur(0px)' }}
-                  transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
-                >
-                  &ldquo;{coachResponse.message}&rdquo;
-                </motion.p>
-
-                {/* Data source (subtle, below the message) */}
-                <motion.p
-                  className="mt-4"
-                  style={{ fontSize: 13, color: 'var(--paper-faint)', lineHeight: 1.5 }}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 0.7 }}
-                  transition={{ duration: 0.8, delay: 0.6 }}
-                >
-                  {coachResponse.dataSource}
-                </motion.p>
+              {/* Dynamic Generation replacing static Coach message */}
+              <div className="-mx-4 md:mx-0">
+                <DynamicPlanPreview 
+                  energy={selectedEnergyOption?.label || "stressed"} 
+                  obstacle={OBSTACLE_OPTIONS.find(o => o.type === selectedObstacle)?.label || "time"} 
+                  coachVoice={selectedEnergyOption?.state === 'stressed' ? "aisha" : "jake"}
+                />
               </div>
 
               <motion.p
@@ -531,7 +497,7 @@ export function CoachHero({ onStepComplete, onAllStepsComplete }: CoachHeroProps
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.5 }}
               >
-                Jake is AI-assisted. Always labeled. The math that moves your training is real.
+                Generated live via Together.ai and Llama-3.3-70B.
               </motion.p>
             </motion.div>
           )}
