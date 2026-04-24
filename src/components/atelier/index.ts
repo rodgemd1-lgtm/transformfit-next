@@ -10,15 +10,7 @@ export { Footer } from './Footer'
 export { WeeklyNarratorPreview } from './WeeklyNarratorPreview'
 export { Day3RestExplainer } from './Day3RestExplainer'
 export { Ladder } from './Ladder'
+export { CoachHero } from './CoachHero'
 
-// Capability components — data visualizations & interactive elements
-export { ReadinessRing } from '../capabilities/ReadinessRing'
-export { HrvSparkline } from '../capabilities/HrvSparkline'
-export { HRZoneBand } from '../capabilities/HRZoneBand'
-export { KpiCounterRow } from '../capabilities/KpiCounterRow'
-export { LongevityTimeline } from '../capabilities/LongevityTimeline'
-export { BreathingCircle } from '../capabilities/BreathingCircle'
-export { PressLogoMarquee } from '../capabilities/PressLogoMarquee'
-export { SampleWeekGrid } from '../capabilities/SampleWeekGrid'
-export { ComparisonSlider } from '../capabilities/ComparisonSlider'
-export { QuizReveal } from '../capabilities/QuizReveal'
+// GenUI — PyCode renderer & CopilotKit
+export { PyHero, PyCoachMessage, PyCTAButton, PySection, PyDataMetric, PyStitchDivider, PyCodeRenderer, PyGenerationHistory } from './PyCodeRenderer'

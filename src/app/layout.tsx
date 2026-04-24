@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter, Playfair_Display } from 'next/font/google'
-import '../styles/globals.css'
+import { CopilotShell } from '@/components/CopilotShell'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -53,7 +53,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Skip to content
         </a>
-        {children}
+        <CopilotShell>{children}</CopilotShell>
       </body>
     </html>
   )
