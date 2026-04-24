@@ -13,9 +13,9 @@ export const TOGETHER_BASE_URL = "https://api.together.xyz/v1";
 export const MODELS = {
   serverless: "meta-llama/Llama-3.3-70B-Instruct-Turbo",
   jake_dedicated:
-    "rodgemd1_3218/Llama-3.3-70B-Instruct-Reference-transformfit-jake-d728b385",
+    "rodgemd1_3218/Llama-3.3-70B-Instruct-Reference-transformfit-jake-d728b385-ce4aabe9",
   aisha_dedicated:
-    "rodgemd1_3218/Llama-3.3-70B-Instruct-Reference-transformfit-aisha-58835bae",
+    "rodgemd1_3218/Llama-3.3-70B-Instruct-Reference-transformfit-aisha-58835bae-223136cd",
 } as const;
 
 // ── System Prompts ──────────────────────────────────────────────────

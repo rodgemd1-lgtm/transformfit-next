@@ -73,58 +73,22 @@ export function useGenUI() {
 
 // ── Together.ai Pipeline (Client-Side) ─────────────────────────────────
 
+import { MODELS, JAKE_SYSTEM_PROMPT, AISHA_SYSTEM_PROMPT, REVIEW_SYSTEM_PROMPT } from "./together-config";
+
 const TOGETHER_API_KEY =
   process.env.NEXT_PUBLIC_TOGETHER_API_KEY ||
   "tgp_v1_bFH05AHjQdMpk42vq9ePIjW2wU5l1gAs1Oh9xo45VZk";
 const TOGETHER_BASE_URL = "https://api.together.xyz/v1";
-const SERVERLESS_MODEL = "meta-llama/Llama-3.3-70B-Instruct-Turbo";
-
-const JAKE_SYSTEM_PROMPT = `You are Jake, the TransformFit strength coach. You generate UI components for the TransformFit landing page.
-
-When asked to generate a component, output ONLY valid JSON (no markdown, no code fences):
-
-For coach_message: {"type":"coach_message","coach":"jake","message":"...","agent":"SPARK","timing":"re_engagement","emphasis":false}
-For hero: {"type":"hero","headline":"...","subline":"...","dark":true}
-For cta_button: {"type":"cta_button","label":"...","href":"...","emotion":"loss_aversion","sublabel":"..."}
-For section: {"type":"section","headline":"...","subline":"...","body":"...","dark":true}
-For data_metric: {"type":"data_metric","label":"...","value":"...","unit":"..."}
-
-Jake's voice: Short sentences. Lead with what you notice. Loss-aversion when urgent. End with micro-commitment.`;
-
-const AISHA_SYSTEM_PROMPT = `You are Aisha, the TransformFit holistic wellness coach. You generate UI components for the TransformFit landing page.
-
-When asked to generate a component, output ONLY valid JSON (no markdown, no code fences):
-
-For coach_message: {"type":"coach_message","coach":"aisha","message":"...","agent":"PULSE","timing":"dawn_prime","emphasis":false}
-For hero: {"type":"hero","headline":"...","subline":"...","dark":true}
-For cta_button: {"type":"cta_button","label":"...","href":"...","emotion":"identity","sublabel":"..."}
-For section: {"type":"section","headline":"...","subline":"...","body":"...","dark":true}
-
-Aisha's voice: Warm, affirming. Frame setbacks as data. Identity reinforcement. End with ritual.`;
-
-const REVIEW_SYSTEM_PROMPT = `You are Jake reviewing a UI component for TransformFit. Evaluate against these criteria:
-
-1. CIALDINI: Does it use at least 1 of 6 principles? (Reciprocity, Commitment, Social Proof, Authority, Liking, Scarcity)
-2. FOGG: Is the behavior model clear? (Motivation + Ability + Prompt = Behavior)
-3. KAHNEMAN: Does it respect System 1/2? (Quick emotional hit → slow proof → identity close)
-4. WCAG: Basic accessibility? (Color contrast, alt text, semantics)
-5. BRAND: Does it sound like TransformFit? (Not generic fitness, not clinical)
-
-Output ONLY valid JSON:
-{"verdict":"PASS"|"WARN"|"FAIL","notes":["issue1","issue2"],"score":8}
-
-PASS = score ≥ 7, no critical issues
-WARN = score 4-6, has issues but shippable
-FAIL = score < 4, needs rewrite`;
 
 async function callTogetherAI(
   messages: { role: string; content: string }[],
   systemPrompt: string,
-  model = SERVERLESS_MODEL,
+  model: string = MODELS.serverless,
   temperature = 0.5,
   maxTokens = 800
 ): Promise<string> {
-  const response = await fetch(`${TOGETHER_BASE_URL}/chat/completions`, {
+  // First try the requested model
+  let response = await fetch(`${TOGETHER_BASE_URL}/chat/completions`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${TOGETHER_API_KEY}`,
@@ -137,6 +101,24 @@ async function callTogetherAI(
       max_tokens: maxTokens,
     }),
   });
+
+  // If fine-tuned model fails (e.g. idle timeout, cold start error), fallback to serverless
+  if (!response.ok && model !== MODELS.serverless) {
+    console.warn(`Dedicated endpoint failed: ${response.status}. Falling back to serverless.`);
+    response = await fetch(`${TOGETHER_BASE_URL}/chat/completions`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${TOGETHER_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        model: MODELS.serverless,
+        messages: [{ role: "system", content: systemPrompt }, ...messages],
+        temperature,
+        max_tokens: maxTokens,
+      }),
+    });
+  }
 
   if (!response.ok) {
     const error = await response.text();
@@ -307,10 +289,14 @@ export function useCopilotGenUIActions() {
 
       try {
         const userMessage = `Generate a "${componentType}" component for a user who is: ${description}. Conversion model: ${conversionModel}. Persona: ${activePersona}.`;
+        
+        // Use fine-tuned models if available
+        const modelKey = voice === "aisha" ? MODELS.aisha_dedicated : MODELS.jake_dedicated;
+        
         const raw = await callTogetherAI(
           [{ role: "user", content: userMessage }],
           systemPrompt,
-          SERVERLESS_MODEL,
+          modelKey,
           voice === "jake" ? 0.3 : 0.5,
           800
         );
@@ -410,7 +396,7 @@ export function useCopilotGenUIActions() {
             },
           ],
           REVIEW_SYSTEM_PROMPT,
-          SERVERLESS_MODEL,
+          MODELS.jake_dedicated, // Jake does all design reviews
           0.4,
           500
         );
@@ -551,7 +537,8 @@ export function useGenUIActions() {
               content: `Generate a "${params.componentType}" component: ${params.description}. Conversion model: ${params.conversionModel || "warm_proof_ladder"}.`,
             },
           ],
-          systemPrompt
+          systemPrompt,
+          voice === "aisha" ? MODELS.aisha_dedicated : MODELS.jake_dedicated
         );
 
         let parsed: Record<string, unknown> | null = null;
@@ -590,7 +577,7 @@ export function useGenUIActions() {
             },
           ],
           REVIEW_SYSTEM_PROMPT,
-          SERVERLESS_MODEL,
+          MODELS.jake_dedicated,
           0.4,
           500
         );
