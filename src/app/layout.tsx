@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter, Playfair_Display } from 'next/font/google'
-import { CopilotShell } from '@/components/CopilotShell'
+// CopilotShell removed from root layout — only added per-route where needed
 
 const inter = Inter({
   subsets: ['latin'],
@@ -53,7 +53,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Skip to content
         </a>
-        <CopilotShell>{children}</CopilotShell>
+        {children}
       </body>
     </html>
   )
