@@ -80,7 +80,7 @@ export function LiveSimulation() {
           className="mb-10"
         >
           <p className="label-caps mb-4" style={{ letterSpacing: '0.3em', color: 'var(--paper-faint)' }}>
-            Readiness Analysis
+            Your morning numbers
           </p>
           <h2
             className="font-display text-paper"
@@ -126,7 +126,7 @@ export function LiveSimulation() {
             </div>
             <div className="text-right">
               <p className="label-caps mb-1" style={{ color: 'var(--paper-faint)', letterSpacing: '0.15em' }}>
-                HRV Δ
+                Heart recovery Δ
               </p>
               <motion.span
                 className="font-mono text-2xl"

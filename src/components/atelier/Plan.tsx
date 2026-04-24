@@ -115,7 +115,7 @@ export function Plan() {
             </p>
             <ul className="space-y-2">
               {[
-                `Full adaptive plan · reads your sleep, HRV, soreness, schedule`,
+                `Full adaptive plan · reads your sleep, heart recovery, soreness, schedule`,
                 `Named head coach · ${SITE.coach} reviews your week`,
                 `Wearable integrations · Oura, Whoop, Garmin, Apple Watch`,
                 `Sunday coach notes · written, not generated`,

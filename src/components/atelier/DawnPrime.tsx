@@ -31,7 +31,7 @@ interface Metric {
 }
 
 const DEFAULT_METRICS: Metric[] = [
-  { label: 'HRV', value: '34', unit: 'ms', color: 'orange' },
+  { label: 'Heart recovery', value: '34', unit: 'ms', color: 'orange' },
   { label: 'Sleep', value: '4.2', unit: 'h', color: 'orange' },
   { label: 'Duration', value: '25', unit: 'min', color: 'green' },
 ]
@@ -145,7 +145,7 @@ export function DawnPrime() {
             transition={{ duration: 0.5, delay: 0.7 }}
           >
             <p style={{ fontSize: 14, lineHeight: 1.65, color: 'var(--paper-muted)' }}>
-              <span style={{ color: 'var(--orange)', fontWeight: 600 }}>HRV −14%</span> · Sleep 4.2h.{' '}
+              <span style={{ color: 'var(--orange)', fontWeight: 600 }}>Heart recovery down 14%</span> · Sleep 4.2h.{' '}
               Your body said recover, not load. I adjusted so you still get a win today.
             </p>
           </motion.div>

@@ -41,15 +41,15 @@ export default function WarmProofLadder() {
             Gradient mesh bg, parallax scroll, glow data cards.
             ═════════════════════════════════════════════════════ */}
         <HeroClinical
-          eyebrow="Readiness, read honestly"
+          eyebrow="Your body has a morning report."
           line1="Tuesday came in hard."
-          line2="The plan already knows."
-          closer="Your HRV dropped. Your sleep was short. The plan already adjusted — you just show up. That's the whole thing."
+          line2="The plan already adjusted."
+          closer="You slept 5 hours. Your heart recovery was off. The workout already scaled down — you just show up. That's the whole thing."
           readouts={[
             { label: 'Sleep', value: '5.1', unit: 'hrs' },
-            { label: 'HRV trend', value: '−14', unit: '%' },
+            { label: 'Heart recovery', value: '−14', unit: '%', note: 'How fast your heart bounces back between beats' },
             { label: 'Time window', value: '20', unit: 'min' },
-            { label: 'Adjusted session', value: 'Mobility + core' },
+            { label: 'What it gave you', value: 'Mobility + core' },
           ]}
         />
 
@@ -151,7 +151,7 @@ export default function WarmProofLadder() {
                 This isn't weakness — it's precision.
               </p>
               <p className="font-display mt-3" style={{ fontSize: 17, fontStyle: 'italic', color: 'var(--orange)' }}>
-                "HRV is down. I've softened today — strength moves to Thursday when your body is ready."
+                "Heart recovery is down. I've softened today — strength moves to Thursday when your body is ready."
               </p>
             </div>
 

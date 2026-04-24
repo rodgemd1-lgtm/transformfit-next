@@ -39,12 +39,12 @@ type EntryPath = 'accountability' | 'autonomy' | 'data' | 'identity'
 type AgentVoice = 'SPARK' | 'PULSE' | 'IRON' | 'EDGE'
 
 interface EnergyOption {
-  emoji: string
   label: string
   state: EnergyState
   anchor: IdentityAnchor
   path: EntryPath
-  color: string // orange, red, blue, green
+  color: string
+  accent: string
 }
 
 interface ObstacleOption {
@@ -75,32 +75,32 @@ interface CoachHeroProps {
 
 const ENERGY_OPTIONS: EnergyOption[] = [
   {
-    emoji: '🟠',
     label: 'Low energy',
+    accent: 'Low',
     state: 'low_energy',
     anchor: 'Architect',
     path: 'autonomy',
     color: 'var(--orange)',
   },
   {
-    emoji: '🔴',
     label: 'Stressed',
+    accent: 'Stressed',
     state: 'stressed',
     anchor: 'Phoenix',
     path: 'identity',
     color: 'var(--error)',
   },
   {
-    emoji: '🔵',
     label: 'Focused',
+    accent: 'Focused',
     state: 'focused',
     anchor: 'Leader',
     path: 'accountability',
     color: 'var(--info)',
   },
   {
-    emoji: '🟢',
     label: 'Ready',
+    accent: 'Ready',
     state: 'ready',
     anchor: 'Explorer',
     path: 'data',
@@ -131,10 +131,10 @@ const COACH_RESPONSES: Record<EnergyState, Record<ObstacleType, CoachResponse>> 
       dataSource: 'Readiness 62%. Adjusted to maintenance mode.',
     },
     data: {
-      message: 'Readiness score: 62%. Session adjusted to mobility + core. HRV is −14% from baseline. The numbers say go light today.',
+      message: 'Readiness score: 62%. Session adjusted to mobility + core. Heart recovery is 14% below your normal. That means go light today.',
       agentVoice: 'PULSE',
       identity: 'Architect',
-      dataSource: 'HRV 38ms (baseline 44ms). Sleep: 5.1 hrs.',
+      dataSource: 'Heart recovery: 38ms (your normal is 44ms). Sleep: 5.1 hrs.',
     },
     identity: {
       message: 'This week tried to break you. It didn\'t. The plan already adjusted. Rest is part of the architecture.',
@@ -157,10 +157,10 @@ const COACH_RESPONSES: Record<EnergyState, Record<ObstacleType, CoachResponse>> 
       dataSource: 'Session auto-scaled. No decisions required.',
     },
     data: {
-      message: 'HRV dropped 14% from baseline. Stress recovery mode activated. Tomorrow\'s session shifts to zone-2. The plan adapts before you ask.',
+      message: 'Heart recovery dropped 14% from baseline. Stress recovery mode activated. Tomorrow\'s session shifts to zone-2. The plan adapts before you ask.',
       agentVoice: 'PULSE',
       identity: 'Phoenix',
-      dataSource: 'Readiness: 58%. HRV: −14%. Adjusting Wednesday to deload.',
+      dataSource: 'Readiness: 58%. Heart recovery: −14%. Adjusting Wednesday to deload.',
     },
     identity: {
       message: 'Phoenixes don\'t skip hard days. They show up differently. That\'s what you just did.',
@@ -183,10 +183,10 @@ const COACH_RESPONSES: Record<EnergyState, Record<ObstacleType, CoachResponse>> 
       dataSource: 'Readiness: 82%. All systems green.',
     },
     data: {
-      message: 'Readiness 85%. HRV trending up 6% week-over-week. Optimized for progressive overload today. The data says: push.',
+      message: 'Readiness 85%. Heart recovery trending up 6% week-over-week. Optimized for progressive overload today. The data says: push.',
       agentVoice: 'PULSE',
       identity: 'Leader',
-      dataSource: 'Readiness: 85%. HRV: 49ms (+6%). Volume tolerance: high.',
+      dataSource: 'Readiness: 85%. Heart recovery: 49ms (+6%). Volume tolerance: high.',
     },
     identity: {
       message: 'The Leader never wastes a clear day. This plan was built for moments like this.',
@@ -209,10 +209,10 @@ const COACH_RESPONSES: Record<EnergyState, Record<ObstacleType, CoachResponse>> 
       dataSource: 'Readiness: 93%. All zones available.',
     },
     data: {
-      message: 'All metrics green. Readiness 91%. HRV stable at 46ms. Sleep: 7.8 hrs. Optimized session, maximum output. The data says: this is your day.',
+      message: 'All metrics green. Readiness 91%. Heart recovery stable at 46ms. Sleep: 7.8 hrs. Optimized session, maximum output. The data says: this is your day.',
       agentVoice: 'PULSE',
       identity: 'Explorer',
-      dataSource: 'Readiness: 91%. HRV: 46ms. Sleep: 7.8 hrs. Volume capacity: max.',
+      dataSource: 'Readiness: 91%. Heart recovery: 46ms. Sleep: 7.8 hrs. Volume capacity: max.',
     },
     identity: {
       message: 'This is what the training is for. Go prove it.',
@@ -241,9 +241,9 @@ const stepContainer = {
   exit: { opacity: 0, transition: { duration: 0.2 } },
 }
 
-const emojiHover = {
-  whileHover: { scale: 1.08, transition: { duration: 0.15 } },
-  whileTap: { scale: 0.96 },
+const btnHover = {
+  whileHover: { scale: 1.03, transition: { duration: 0.15 } },
+  whileTap: { scale: 0.97 },
 }
 
 // ── Component ──────────────────────────────────────────────────
@@ -341,12 +341,12 @@ export function CoachHero({ onStepComplete, onAllStepsComplete }: CoachHeroProps
                     initial="initial"
                     animate="animate"
                     transition={mkTransition(0.35 + idx * 0.08)}
-                    {...emojiHover}
+                    {...btnHover}
                     onClick={() => handleEnergySelect(option)}
                     aria-label={option.label}
                   >
-                    <span style={{ fontSize: 32 }} role="img" aria-hidden="true">
-                      {option.emoji}
+                    <span className="font-display block mb-2" style={{ fontSize: 14, fontStyle: 'italic', color: option.color }}>
+                      {option.accent}
                     </span>
                     <p
                       className="mt-2 font-sans text-paper-muted group-hover:text-paper transition-colors"
@@ -386,7 +386,7 @@ export function CoachHero({ onStepComplete, onAllStepsComplete }: CoachHeroProps
                     fontSize: 12,
                   }}
                 >
-                  <span role="img" aria-hidden="true">{selectedEnergyOption?.emoji}</span>
+                  <span style={{ color: selectedEnergyOption?.color }}>{selectedEnergyOption?.accent}</span>
                   <span style={{ color: 'var(--paper-muted)' }}>{selectedEnergyOption?.label}</span>
                 </span>
               </motion.div>
@@ -418,7 +418,7 @@ export function CoachHero({ onStepComplete, onAllStepsComplete }: CoachHeroProps
                     initial="initial"
                     animate="animate"
                     transition={mkTransition(0.2 + idx * 0.08)}
-                    {...emojiHover}
+                    {...btnHover}
                     onClick={() => handleObstacleSelect(option)}
                     aria-label={option.label}
                   >
@@ -464,7 +464,7 @@ export function CoachHero({ onStepComplete, onAllStepsComplete }: CoachHeroProps
                     color: 'var(--paper-muted)',
                   }}
                 >
-                  <span role="img" aria-hidden="true">{selectedEnergyOption?.emoji}</span>
+                  <span style={{ color: selectedEnergyOption?.color }}>{selectedEnergyOption?.accent}</span>
                   {selectedEnergyOption?.label}
                 </span>
                 <span style={{ color: 'var(--paper-faint)', fontSize: 12 }}>·</span>
@@ -525,7 +525,7 @@ export function CoachHero({ onStepComplete, onAllStepsComplete }: CoachHeroProps
                     time: '6:00 AM',
                     agent: 'PULSE',
                     action: 'Reads your readiness',
-                    detail: 'Sleep, HRV, soreness',
+                    detail: 'Sleep, heart recovery, soreness',
                   },
                   {
                     time: '12:00 PM',

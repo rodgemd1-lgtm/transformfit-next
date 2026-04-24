@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>TransformFit — AI Fitness Coach</title>
+    <meta name="description" content="APEX adapts your workout after every set using HRV, RPE, and real biometric data. Never waste another rep.">
+    <meta name="google-site-verification" content="R4PQq5Nm5U42DwklrTbLI8KQeWd4SwdrOYFb72VfhNI" />
+    <meta name="author" content="TransformFit" />
+
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#0A0A0A" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="TransformFit" />
+
+    <!-- Icons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192x192.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="/icons/icon-152x152.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192x192.png" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://transformfits.com/" />
+    <meta property="og:title" content="TransformFit — AI Strength Training That Adapts Every Rep" />
+    <meta property="og:description" content="Evidence-based periodization, real-time AI coaching, and smart progression tracking. Join 18k+ athletes who never waste a rep." />
+    <meta property="og:image" content="https://transformfits.com/images/hero-athlete.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="TransformFit" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@transformfit" />
+    <meta name="twitter:creator" content="@transformfit" />
+    <meta name="twitter:title" content="TransformFit — AI Strength Training That Adapts Every Rep" />
+    <meta name="twitter:description" content="Evidence-based periodization, real-time AI coaching, and smart progression tracking. Join 18k+ athletes." />
+    <meta name="twitter:image" content="https://transformfits.com/images/hero-athlete.png" />
+    <meta name="twitter:image:alt" content="TransformFit — AI-powered strength training platform" />
+
+    <!-- Instagram / App Links -->
+    <meta property="al:ios:app_store_id" content="6740001234" />
+    <meta property="al:ios:app_name" content="TransformFit" />
+    <meta property="al:ios:url" content="transformfit://dashboard" />
+    <meta name="apple-itunes-app" content="app-id=6740001234, app-argument=https://transformfits.com/" />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SportsActivityLocation",
+      "name": "TransformFit",
+      "description": "AI-powered strength training platform with adaptive periodization and real-time coaching.",
+      "url": "https://transformfits.com",
+      "image": "https://transformfits.com/images/hero-athlete.png",
+      "sameAs": [
+        "https://twitter.com/transformfit",
+        "https://instagram.com/transformfit"
+      ],
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+        "opens": "00:00",
+        "closes": "23:59"
+      }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "MobileApplication",
+      "name": "TransformFit — AI Strength Training",
+      "operatingSystem": "iOS, Android",
+      "applicationCategory": "HealthApplication",
+      "description": "AI-powered strength training that adapts every session. Evidence-based periodization, real-time coaching, and smart progression tracking.",
+      "url": "https://transformfits.com",
+      "image": "https://transformfits.com/images/hero-athlete.png",
+      "author": {
+        "@type": "Organization",
+        "name": "TransformFit",
+        "url": "https://transformfits.com"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://www.transformfits.com/" />
+
+    <!-- DNS prefetch for external services -->
+    <link rel="dns-prefetch" href="https://qgjxfvepemtoawpcjhbj.supabase.co" />
+    <link rel="preconnect" href="https://qgjxfvepemtoawpcjhbj.supabase.co" crossorigin />
+
+    <!-- Preload critical assets -->
+    <link rel="preload" as="image" href="/images/hero-athlete.png" />
+    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=900&q=85&sat=-100" />
+
+    <link rel="preload" as="font" type="font/woff2" href="https://fonts.gstatic.com/s/spacegrotesk/v16/V8mDoQDjQSkFtoMM3T6r8E7mPbF4Cw.woff2" crossorigin />
+
+    <!-- Font preconnect (loaded via CSS @import in index.css) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Hotjar — session recording + heatmaps (free tier: 35 sessions/day)
+         Sign up at hotjar.com, get your Site ID, replace HOTJAR_SITE_ID below.
+         Until then this script is inert (no-op). -->
+    <script>
+      (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:window.__HOTJAR_ID||0,hjsv:6};
+        if(!h._hjSettings.hjid) return;
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j;
+        a.appendChild(r);
+      })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=6');
+    </script>
+  <script type="module" crossorigin src="/assets/index-gnv7CWYc.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/vendor-TxBrmpWI.js">
+  <link rel="modulepreload" crossorigin href="/assets/supabase-D1GN6mXF.js">
+  <link rel="modulepreload" crossorigin href="/assets/ui-DQrMGOEG.js">
+  <link rel="modulepreload" crossorigin href="/assets/charts-pLmABaFt.js">
+  <link rel="modulepreload" crossorigin href="/assets/query-L5BBFyjM.js">
+  <link rel="modulepreload" crossorigin href="/assets/sentry-UMjxHgiU.js">
+  <link rel="stylesheet" crossorigin href="/assets/index-Bu9uutNQ.css">
+<link rel="manifest" href="/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/registerSW.js"></script></head>
+
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

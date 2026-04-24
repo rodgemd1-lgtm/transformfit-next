@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 import { cn, SITE } from '@/lib/utils'
 
 /* ── Nav ───────────────────────────────────────────────
@@ -21,12 +22,16 @@ export function Nav() {
         {/* Wordmark */}
         <a href="/" className="flex items-center gap-2.5 group" aria-label="TransformFit home">
           <div
-            className="w-6 h-6 rounded-sharp flex items-center justify-center"
-            style={{ background: 'linear-gradient(135deg, var(--orange), var(--orange-warm))' }}
+            className="w-8 h-8 rounded-sm flex items-center justify-center overflow-hidden"
           >
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-              <path d="M6 1v10M1 6h10" stroke="var(--ink)" strokeWidth="2.5" strokeLinecap="round" />
-            </svg>
+            <Image
+              src="/images/logo/transformfit-logo.png"
+              alt="TransformFit"
+              width={32}
+              height={32}
+              className="object-contain"
+              priority
+            />
           </div>
           <span className="font-display text-paper text-[17px] italic tracking-tight">
             {SITE.name}
