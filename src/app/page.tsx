@@ -1,20 +1,21 @@
 // ═══════════════════════════════════════════════════════════════
-// TransformFit Next — Landing Page (Story-Driven Redesign)
+// TransformFit Next — CINEMATIC Landing Page (2026 Standard)
 //
-// PROBLEM: Previous version was a data dump. Mike's feedback:
-//   "There's a lot of stuff that does not mean anything to me.
-//    It's hard to understand and follow. It looks exactly the same."
+// Whoop/Superhuman-level visual quality:
+//   - Gradient mesh backgrounds (not flat black)
+//   - Scroll-triggered progressive reveals
+//   - Orange pulse/glow on key data
+//   - Micro-interactions on hover/tap
+//   - Data as visual hero (not stock photos)
 //
-// FIX: Strip it down. Story first, data second. CoachHero IS the
-// experience, not one of 15 sections. The alpha site works because
-// it's a coach talking to you — not a dashboard with HRV numbers.
-//
-// New flow (inspired by alpha + our spec):
-//   1. Coach speaks first — "Tuesday came in hard" (emotion)
-//   2. CoachHero — progressive questioning (you talk back)
-//   3. Your first week — what it actually looks like (story)
-//   4. What we won't do — trust section (authenticity)
-//   5. Start — 3-day trial CTA (conversion)
+// Flow (5 story-driven sections + 2 cinematic features):
+//   1. HeroClinical — "Tuesday came in hard" (parallax, mesh bg)
+//   2. LiveSimulation — Cold Data: readiness slider → generated plan
+//   3. CoachHero — progressive questioning → AI plan generation
+//   4. DawnPrime — The Preview: Was → Now comparison
+//   5. Your First Week — 3-day story with coach quotes
+//   6. What we won't do — trust section
+//   7. Plan + NoSignupWall — email capture CTA
 //
 // ═══════════════════════════════════════════════════════════════
 
@@ -22,6 +23,8 @@ import { Nav } from '@/components/atelier/Nav'
 import { HeroClinical } from '@/components/atelier/HeroClinical'
 import { StitchDivider } from '@/components/atelier/StitchDivider'
 import { CoachHero } from '@/components/atelier/CoachHero'
+import { LiveSimulation } from '@/components/atelier/LiveSimulation'
+import { DawnPrime } from '@/components/atelier/DawnPrime'
 import { Plan } from '@/components/atelier/Plan'
 import { Footer } from '@/components/atelier/Footer'
 import { NoSignupWall } from '@/components/sections/NoSignupWall'
@@ -34,9 +37,8 @@ export default function WarmProofLadder() {
 
       <main id="main-content">
         {/* ═════════════════════════════════════════════════════
-            1. COACH SPEAKS FIRST
-            The hero is a coach note. Not a dashboard. Not data.
-            Just a coach who already knows your Tuesday was hard.
+            1. COACH SPEAKS FIRST (CINEMATIC HERO)
+            Gradient mesh bg, parallax scroll, glow data cards.
             ═════════════════════════════════════════════════════ */}
         <HeroClinical
           eyebrow="Readiness, read honestly"
@@ -52,19 +54,30 @@ export default function WarmProofLadder() {
         />
 
         {/* ═════════════════════════════════════════════════════
-            2. COACH HERO — YOU TALK BACK
-            The coach asked. Now you answer. Two taps, zero
-            friction. The coach EMERGES from your response.
-            
-            This is the moment. Not a card selector. Not a form.
-            A conversation with a coach who already knows your week.
+            2. LIVE SIMULATION — Cold Data Pattern
+            Interactive readiness slider that generates a 3-day
+            plan in real-time. Data IS the visual hero.
+            ═════════════════════════════════════════════════════ */}
+        <LiveSimulation />
+
+        <StitchDivider />
+
+        {/* ═════════════════════════════════════════════════════
+            3. COACH HERO — YOU TALK BACK
+            Progressive questioning → AI-generated plan.
             ═════════════════════════════════════════════════════ */}
         <CoachHero />
 
         {/* ═════════════════════════════════════════════════════
-            3. YOUR FIRST WEEK
-            Not a feature list. A story. What Tuesday through Sunday
-            actually looks like when the plan reads your body.
+            4. DAWN PRIME — THE PREVIEW
+            Was → Now comparison. Proactive coaching that
+            already adjusted your plan before you woke up.
+            ═════════════════════════════════════════════════════ */}
+        <DawnPrime />
+
+        {/* ═════════════════════════════════════════════════════
+            5. YOUR FIRST WEEK
+            3-day story with coach quotes.
             ═════════════════════════════════════════════════════ */}
         <section className="section" aria-label="Your first week">
           <div className="container-atelier" style={{ maxWidth: 640 }}>
@@ -181,16 +194,12 @@ export default function WarmProofLadder() {
         </section>
 
         {/* ═════════════════════════════════════════════════════
-            4. WHAT WE WON'T DO — Trust through authenticity
-            No dark patterns. No guilt. No BS. This is the
-            trust section — values alignment creates commitment.
+            6. WHAT WE WON'T DO — Trust through authenticity
             ═════════════════════════════════════════════════════ */}
         <WhatWeWontDo />
 
         {/* ═════════════════════════════════════════════════════
-            5. START — 3-day trial CTA
-            Loss aversion + transparency. No credit card. No
-            email wall. Just start.
+            7. START — 3-day trial CTA
             ═════════════════════════════════════════════════════ */}
         <StitchDivider />
         <Plan />
