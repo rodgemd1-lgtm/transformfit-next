@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter, Playfair_Display } from 'next/font/google'
+import '../styles/globals.css'
 // CopilotShell removed from root layout — only added per-route where needed
 
 const inter = Inter({
